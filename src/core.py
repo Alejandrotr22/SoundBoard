@@ -5,8 +5,7 @@ import os
 
 class SoundController():
     
-    def __init__(self,index:int,root):
-        self.root = root
+    def __init__(self,index:int):
         self.index = index
         self.loopThread: loopThread
         self.fade_out_timer = 0
@@ -15,6 +14,7 @@ class SoundController():
         self.channel = pygame.mixer.Channel(index)
         self.sound = None
         self.volume = 0
+        self.sound_name = ""
     
     def reproducir_audio(self,volume):
         if self.sound :

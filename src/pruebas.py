@@ -1,24 +1,9 @@
-import flet as ft
-from core import *
-import math
+
 from sizeAwareControl import SizeAwareControl
-
-
+import flet as ft
 
 
 def main(page: ft.Page):
-    
-    #s1 = SoundController(index=1)
-    sounds = []
-    
-    #sounds.append(s1)
-    
-    
-    page.theme = ft.Theme()
-    #ft.MaterialState.DEFAULT: ft.RoundedRectangleBorder(radius=2)
-    for sound in sounds:
-        pass
-    
     def handle_resize(e: ft.canvas.CanvasResizeEvent):
         """
         The handle_resize function is a callback function that will be called when
@@ -35,7 +20,8 @@ def main(page: ft.Page):
         # instead of e.width for example, you can use the e.control.size namedtuple (e.control.size.width or e.control.size[0])
         t.value = f"{e.width} x {e.height}"
         page.update()
-    
+
+
     sound_controls = ft.Row( width=300,height=300, controls= [
         ft.Column(expand = 1, horizontal_alignment=ft.CrossAxisAlignment.CENTER ,controls=[
             ft.IconButton(icon=ft.icons.ARROW_DROP_UP,expand=3),
@@ -54,10 +40,11 @@ def main(page: ft.Page):
         ])
     ])
     
-    sound_cage = SizeAwareControl(content=sound_controls,on_resize=handle_resize,expand = 1)
-    
-    page.add(sound_controls)
+    s1 = SizeAwareControl(ft.Container(content=sound_controls, bgcolor=ft.colors.RED, alignment=ft.alignment.center), on_resize=handle_resize, expand=2)
+    s2 = SizeAwareControl(ft.Container(content=ft.Text("W x H"), bgcolor=ft.colors.BLUE, alignment=ft.alignment.center), on_resize=handle_resize, expand=3)
 
-    page.update()
+    page.add(
+        ft.Row([s1, s2], expand=True),
+    )
 
 ft.app(main)
